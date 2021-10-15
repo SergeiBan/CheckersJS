@@ -1,0 +1,28 @@
+.board {
+    width: 95vmin;
+    height: 95min;
+    margin: 0 auto;
+}
+
+.B {
+    width: 9vmin;
+    height: 9vmin;
+    background: blue;
+}
+
+.V {
+    width: 9vmin;
+    height: 9vmin;
+    background: grey;
+}
+
+.W {
+    width: 9vmin;
+    height: 9vmin;
+    background: green;
+}
+
+button {
+    outline: none;
+    border: none;
+}
