@@ -32,7 +32,6 @@ for (let row = 0; row < board.length; row++) {
         btn.classList.add(board[row][man]);
         btn.setAttribute('data-y', row);
         btn.setAttribute('data-x', man);
-        btn.textContent = board[row][man];
         btn.onclick = function() {
             boardState.buttonPosition = btn;
             flowControl(boardState, btn);
