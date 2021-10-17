@@ -7,7 +7,7 @@ const board = [
     ['B', 'V', 'B', 'V', 'B', 'V', 'B', 'V', 'B', 'V'],
     ['V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
     ['V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V', 'V'],
-    ['V', 'W', 'V', 'W', 'V', 'W', 'V', 'W', 'V', 'W'],
+    ['V', 'W', 'V', 'WQ', 'V', 'W', 'V', 'W', 'V', 'W'],
     ['W', 'V', 'W', 'V', 'W', 'V', 'W', 'V', 'W', 'V'],
     ['V', 'W', 'V', 'W', 'V', 'W', 'V', 'W', 'V', 'W'],
     ['W', 'V', 'W', 'V', 'W', 'V', 'W', 'V', 'W', 'V']
@@ -23,7 +23,8 @@ const boardState = {
     isPicked: false,
     boardNow: board,
     pickedButton: 0,
-    buttonPosition: 0
+    buttonPosition: 0,
+    attackScenarios: []
 }
 
 for (let row = 0; row < board.length; row++) {
