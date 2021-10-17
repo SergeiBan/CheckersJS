@@ -3,6 +3,7 @@ import { strike } from "./strike.js";
 import { pickMan } from "./pickMan.js";
 
 export const flowControl = boardState => {
+    console.log(boardState.attackScenarios);
     const btn = boardState.buttonPosition;
     const [newY, newX] = [parseInt(btn.dataset.y), parseInt(btn.dataset.x)];
     if (!boardState.mustAttack && btn.classList.contains(boardState.color)) {
@@ -21,8 +22,8 @@ export const flowControl = boardState => {
         });
         return;
     }
-    
     if (boardState.mustAttack && boardState.isPicked) {
+        
         strike(boardState);
         return;
     }

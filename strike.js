@@ -7,13 +7,14 @@ export const strike = boardState => {
     const pickedBtn = boardState.pickedButton;
     const [newY, newX] = [parseInt(btn.dataset.y), parseInt(btn.dataset.x)];
     const [pickedY, pickedX] = [parseInt(pickedBtn.dataset.y), parseInt(pickedBtn.dataset.x)];
+
     for (let i = 0; i < boardState.attackScenarios.length; i++) {
         const scenario = boardState.attackScenarios[i];
         if (scenario.initial.y == newY && scenario.initial.x == newX) {
             pickMan(boardState);
             return;
         }
-        console.log(scenario.stops, newY, newX);
+
         if (scenario.stops[0].y == newY && scenario.stops[0].x == newX
         && scenario.initial.y == pickedY && scenario.initial.x == pickedX) {
 
@@ -34,11 +35,15 @@ export const strike = boardState => {
             boardState.boardNow[eatenY][eatenX] = 'V';
 
             if (scenario.counter > 1) {
+                boardState.attackScenarios.forEach(scenario => {
+                    scenario['initial'] = scenario['stops'][0];
+                    scenario['stops'].shift();
+                    scenario['eaten'].shift();
+                    scenario['counter'] -= 1;                    
+                });
+
                 boardState.pickedButton = boardState.buttonPosition;
-                scenario['initial'] = scenario['stops'][0];
-                scenario['stops'].shift();
-                scenario['eaten'].shift();
-                scenario['counter'] -= 1;
+                
                 return;
             } else {
                 const newScenarios = checkForTargets(boardState);

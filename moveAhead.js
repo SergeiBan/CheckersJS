@@ -35,7 +35,7 @@ export const moveAhead = boardState => {
             boardState.isPicked = false;
             boardState.attackScenarios = checkForTargets(boardState);
             if (boardState.attackScenarios.length > 0) { boardState.mustAttack = true; }
-            
+
             boardState.color = (boardState.color == 'W') ? 'B' : 'W';
         }
         

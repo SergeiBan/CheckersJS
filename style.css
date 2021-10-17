@@ -21,6 +21,10 @@
 .W.Q {
     background: cyan;
 }
+
+.B.Q {
+    background: darkorchid;
+}
 button {
     border: none;
     outline: outset;

@@ -14,6 +14,7 @@ export const checkForTargets = boardState => {
             }
         }
     }
+    console.log((scenariosTotal.length > 0) ? filterLongestScenarios(scenariosTotal) : scenariosTotal);
     return (scenariosTotal.length > 0) ? filterLongestScenarios(scenariosTotal) : scenariosTotal;
 }
 
