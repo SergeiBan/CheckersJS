@@ -13,8 +13,10 @@ export const strike = boardState => {
             pickMan(boardState);
             return;
         }
+        console.log(scenario.stops, newY, newX);
         if (scenario.stops[0].y == newY && scenario.stops[0].x == newX
         && scenario.initial.y == pickedY && scenario.initial.x == pickedX) {
+
             discardScenarios(scenario, boardState);
 
             btn.classList.remove(...btn.classList);

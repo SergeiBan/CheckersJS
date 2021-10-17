@@ -9,15 +9,9 @@ export const flowControl = boardState => {
         pickMan(boardState, btn);
         return;
     }
-    if (!boardState.mustAttack && boardState.isPicked && btn.classList.contains('V')) { // Moving ahead
-        const [oldY, oldX] = [parseInt(boardState.pickedButton.dataset.y), parseInt(boardState.pickedButton.dataset.x)];
-        if(
-            (boardState.color == 'W' && newY == oldY - 1 && Math.abs(newX - oldX) == 1) ||
-            (boardState.color == 'B' && newY == oldY + 1 && Math.abs(newX - oldX) == 1)
-        ) {
-            moveAhead(boardState);
-            return;
-        }
+    if (!boardState.mustAttack && boardState.isPicked) { // Moving ahead
+        moveAhead(boardState);
+        return;
     }
     if (boardState.mustAttack && !boardState.isPicked) { // We can only pick those, who must attack
         boardState.attackScenarios.forEach(scenario => {

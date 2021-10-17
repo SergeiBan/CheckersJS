@@ -34,7 +34,8 @@ const findScenarios = (man, boardState) => {
             if ( y > 1 && x < len - 2) { challenges.push([y-1, x+1, y-2, x+2]); }
             if ( y < len - 2 && x > 1) { challenges.push([y+1, x-1, y+2, x-2]); }
             if ( y < len - 2 && x < len - 2) { challenges.push([y+1, x+1, y+2, x+2]); }
-    
+            
+            let isOpponentClose = false;
             challenges.forEach(val => {
                 if (map[val[0]][val[1]].includes(previousColor) && map[val[2]][val[3]] === 'V') {
                     const newMap = deepCopyFunction(map);
@@ -45,10 +46,11 @@ const findScenarios = (man, boardState) => {
                     newEaten.push({'y': val[0], 'x': val[1]});
                     const newStopPoints = deepCopyFunction(stopPoints);
                     newStopPoints.push({'y': val[2], 'x': val[3]});
+                    isOpponentClose = true;
                     researchScenario(initial, {'y': val[2], 'x': val[3]}, newEaten, newMap, (res + 1), newStopPoints, '');
                 }
             });
-            if ((nextColor == 'W' && y == 0) || (nextColor == 'B' && y == len - 1)) {
+            if ((!isOpponentClose && (nextColor == 'W' && y == 0) || (nextColor == 'B' && y == len - 1))) {
                 const queenMap = deepCopyFunction(map);
                 queenMap[y][x] += 'Q';
                 researchScenario(initial, {'y': y, 'x': x}, eaten, queenMap, res, stopPoints, previousDirection);
@@ -102,6 +104,43 @@ const findScenarios = (man, boardState) => {
                         }
                         if (consideredSpots.length > 0) {
                             queensHunt(consideredSpots, nextY, nextX, 'NE');
+                        }
+                    }
+                }
+            }
+            if (y < len - 2 && x > 1 && previousDirection != 'NE') {
+                for (let nextY = y + 1, nextX = x - 1; (nextY < len - 1 && nextX > 0); nextY++, nextX--) {
+                    if (map[nextY][nextX].includes(previousColor) && map[nextY + 1][nextX - 1].includes(previousColor)) { break; }
+                    if (map[nextY][nextX].includes(nextColor)) { break; }
+                    if (map[nextY][nextX].includes(previousColor) && map[nextY + 1][nextX - 1] == 'V') {
+                        const consideredSpots = [];
+                        for (let i = nextY + 1, j = nextX - 1; (i <= len - 1 && j >= 0); i++, j--) {
+                            if (map[i][j].includes(nextColor) || map[i][j].includes(previousColor)) {
+                                break;
+                            }
+                            consideredSpots.push({y: i, x: j});
+                        }
+                        if (consideredSpots.length > 0) {
+                            queensHunt(consideredSpots, nextY, nextX, 'SW');
+                        }
+                    }
+                }
+            }
+            if (y < len - 2 && x < len - 2 && previousDirection != 'NW') {
+                for (let nextY = y + 1, nextX = x + 1; (nextY < len - 1 && nextX < len - 1); nextY++, nextX++) {
+                    if (map[nextY][nextX].includes(previousColor) && map[nextY + 1][nextX + 1].includes(previousColor)) { break; }
+                    if (map[nextY][nextX].includes(nextColor)) { break; }
+                    if (map[nextY][nextX].includes(previousColor) && map[nextY + 1][nextX + 1] == 'V') {
+                        
+                        const consideredSpots = [];
+                        for (let i = nextY + 1, j = nextX + 1; (i <= len - 1 && j <= len - 1); i++, j++) {
+                            if (map[i][j].includes(nextColor) || map[i][j].includes(previousColor)) {
+                                break;
+                            }
+                            consideredSpots.push({y: i, x: j});
+                        }
+                        if (consideredSpots.length > 0) {
+                            queensHunt(consideredSpots, nextY, nextX, 'SE');
                         }
                     }
                 }
